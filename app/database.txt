@@ -1,0 +1,82 @@
+CREATE DATABASE IF NOT EXISTS MedicalStore;
+USE MedicalStore;
+
+CREATE TABLE IF NOT EXISTS UserTable (
+    U_id INT PRIMARY KEY,
+    U_firstname VARCHAR(50) NOT NULL,
+    U_lastname VARCHAR(50) NOT NULL,
+    U_dob DATE NOT NULL,
+    U_gender ENUM('Male', 'Female', 'Other') NOT NULL,
+    U_mobile_no VARCHAR(15) NOT NULL UNIQUE,
+    U_address VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS User (
+    Username VARCHAR(50) PRIMARY KEY,
+    U_Password VARCHAR(60) NOT NULL,
+    U_id INT NOT NULL,
+    FOREIGN KEY (U_id) REFERENCES UserTable(U_id) 
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+    
+CREATE TABLE IF NOT EXISTS Medicine (
+    M_id INT PRIMARY KEY,
+    M_name VARCHAR(100) NOT NULL,
+    M_quantity INT NOT NULL CHECK (M_quantity >= 0),
+    M_price DECIMAL(10, 2) NOT NULL CHECK (M_price >= 0),
+    U_id INT NOT NULL,
+    FOREIGN KEY (U_id) REFERENCES UserTable(U_id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Customers (
+    C_id INT PRIMARY KEY,
+    C_firstname VARCHAR(50) NOT NULL,
+    C_lastname VARCHAR(50) NOT NULL,
+    C_gender ENUM('Male', 'Female', 'Other') NOT NULL,
+    C_age INT NOT NULL CHECK (C_age >= 18 AND C_age <= 120),
+    C_mobile_no VARCHAR(15) NOT NULL UNIQUE,
+    U_id INT NOT NULL,
+    FOREIGN KEY (U_id) REFERENCES UserTable(U_id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+
+CREATE TABLE IF NOT EXISTS SalesTable (
+    S_id INT PRIMARY KEY,
+    S_date DATE NOT NULL,
+	S_time TIME NOT NULL,
+    S_total_price DECIMAL(10, 2) NOT NULL CHECK (S_total_price >= 0),
+    C_id INT NOT NULL,
+    U_id INT NOT NULL,
+    FOREIGN KEY (C_id) REFERENCES Customers(C_id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+    FOREIGN KEY (U_id) REFERENCES UserTable(U_id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+
+CREATE TABLE IF NOT EXISTS SalesItemsTable (
+    item_id INT PRIMARY KEY,
+    S_quantity INT NOT NULL CHECK (S_quantity > 0),
+    M_id INT NOT NULL,
+    S_id INT NOT NULL,
+    U_id INT NOT NULL,
+    FOREIGN KEY (M_id) REFERENCES Medicine(M_id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+    FOREIGN KEY (S_id) REFERENCES SalesTable(S_id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+    FOREIGN KEY (U_id) REFERENCES UserTable(U_id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+
+

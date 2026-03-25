@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Store Management - Home Page</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #1e2a3a;
+            color: #e1e8f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .body {
+            width: 100%;
+            height: 100%;
+            max-width: 1200px;
+            padding: min(20px);
+        }
+
+        h2 {
+            color: #5a8fbd;
+        }
+
+        .nav-div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #243b55;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .nav-div h2 {
+            font-size: 24px;
+            color: #ffffff;
+        }
+
+        .nav-subbar {
+            display: flex;
+            justify-content: space-between;
+            background-color: #1c2a3b;
+            padding: 10px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 10px;
+        }
+
+        .nav-subbar button {
+            background-color: #5a8fbd;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-subbar button:hover {
+            background-color: #3b6c8e;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="password"],
+        .form-group select,
+        textarea {
+            width: 50%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #5a8fbd;
+            background-color: #2a3b4c;
+            color: #fff;
+        }
+
+        .form-group label {
+            color: #a8c1d1;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #a8c1d1;
+        }
+
+
+
+        /*date and dropdown style*/
+        input[type="date"],
+        .form-group select {
+            color: #ffffff69;
+        }
+
+        input[type="date"]:focus,
+        .form-group select:focus {
+            color: #fff;
+        }
+
+
+
+        /*Home Page*/
+        .card {
+            background-color: #2a3b4c;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .card p {
+            color: #d1dbe5;
+        }
+
+
+
+        /*Add pages*/
+        .HomeP,
+        .AddMedP,
+        .RemMedP,
+        .PrintIP,
+        .AddCusP,
+        .PrintCusP,
+        .GBillP,
+        .SalesHisP,
+        .ProfileP {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .AddMed-btn,
+        .RemMed-btn,
+        .next-btn,
+        .btn {
+            background-color: #5a8fbd;
+            color: white;
+            padding: 12px;
+            width: 48%;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .AddMed-btn:hover,
+        .RemMed-btn:hover,
+        .next-btn:hover,
+        .btn:hover {
+            background-color: #3b6c8e;
+        }
+
+        @Media (max-width : 600px) {
+
+            input[type="text"],
+            input[type="number"],
+            input[type="tel"],
+            input[type="date"],
+            input[type="password"],
+            .form-group select,
+            textarea {
+                width: 80%;
+            }
+
+            .AddMed-btn,
+            .RemMed-btn,
+            .next-btn,
+            .btn {
+                width: 73%;
+            }
+        }
+
+
+
+        /*table style*/
+        .table-div {
+            margin: 20px 0px;
+            overflow-x: auto;
+            width: 100%;
+        }
+
+        table {
+            width: 90%;
+            margin: 0px 5% 0px 5%;
+            border-collapse: collapse;
+            text-align: center;
+            color: #ecf0f1;
+        }
+
+        table th,
+        table td {
+            border: 1px solid #5a8fbd85;
+            padding: 12px;
+        }
+
+        table th {
+            background-color: #34495e;
+        }
+
+        table td {
+            background-color: #2c3e50;
+        }
+
+        .table-div button {
+            background-color: #5a8fbd;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .table-div button:hover {
+            background-color: #3b6c8e;
+        }
+
+
+
+        /*GBillP style*/
+        .GBillP h2 {
+            margin: 0px 0px 10px 0px;
+        }
+
+        .GBillP3 {
+            margin: 15px auto;
+        }
+
+
+
+        /*ProfileP style*/
+        .profile-details,
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-details {
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .profile-container {
+            gap: 5px;
+        }
+
+
+
+        /*recipt style*/
+        body {
+            position: relative;
+        }
+
+        .body {
+            position: relative;
+        }
+
+        .body-recipt {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #1c2736f2;
+            padding: 5%;
+            text-align: right;
+        }
+
+        .recipt {
+            background-color: transparent;
+            text-align: center;
+        }
+
+        .recipt table {
+            width: 100%;
+            margin: 0px;
+        }
+
+        .recipt .table-div {
+            margin: 0px;
+        }
+
+        .recipt p {
+            margin-bottom: 10px;
+        }
+
+        .recipt h2 {
+            text-decoration: underline;
+            margin-bottom: 20px;
+        }
+
+        .total-section {
+            width: min(100%);
+            text-align: right;
+            font-size: 18px;
+            border: 1px solid #5a8fbd85;
+            background-color: #2c3e50;
+            border-top: none;
+            padding: 10px;
+        }
+
+
+
+        /*buttons styple svg*/
+        .nav-div .Profile,
+        .body-recipt .close {
+            cursor: pointer;
+            border-radius: 50%;
+            border: none;
+            background-color: transparent;
+        }
+
+        .nav-div .Profile {
+            width: 35px;
+            height: 35px;
+            background-image: url("profile.svg");
+            background-size: cover;
+        }
+
+        .body-recipt .close {
+            width: 30px;
+            height: 30px;
+            background-image: url("wrong.svg");
+            background-size: cover;
+        }
+
+
+
+        /*message style*/
+        .message {
+            font-size: small;
+            margin: 0px 0px 10px 0px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body">
+        <nav>
+            <div class="nav-div">
+                <h2>Medical Store Management</h2>
+                <button class="Profile" onclick="showPage('ProfileP')"></button>
+            </div>
+
+            <div class="nav-subbar">
+                <button class="Home" onclick="showPage('HomeP')">Home</button>
+                <button class="AddMed" onclick="showPage('AddMedP')">Add Medicine</button>
+                <button class="RemMed" onclick="showPage('RemMedP')">Remove Medicine</button>
+                <button class="PrintI" onclick="showPage('PrintIP')">Print Inventory</button>
+                <button class="AddCus" onclick="showPage('AddCusP')">Add Customer</button>
+                <button class="PrintCus" onclick="showPage('PrintCusP')">Customer Details</button>
+                <button class="GBill" onclick="showPage('GBillP')">Generate Bill</button>
+                <button class="SalesHis" onclick="showPage('SalesHisP')">Sales History</button>
+            </div>
+        </nav>
+
+
+
+        <main>
+            <div class="main-content">
+                <!-- invalid password message -->
+                <div class="message" style="display: none">
+                    Incorrect username or password. Please try again.
+                </div>
+
+
+
+                <div class="HomeP">
+                    <div class="card">
+                        <h2>Welcome to the Medical Store</h2>
+                        <p>Manage your inventory, track orders, and generate reports all from one place. Keep your
+                            business running smoothly and efficiently with easy access to all the tools you need.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h2>Latest Inventory Updates</h2>
+                        <p>Check out the latest stock updates, new arrivals, and popular products that you can add
+                            to your inventory. Stay up-to-date with what's available in the store.</p>
+                    </div>
+                    <div class="card">
+                        <h2>Sales Overview</h2>
+                        <p>Track your sales data and see the performance of your medical products. Generate reports
+                            to analyze the most popular products and seasonal trends.</p>
+                    </div>
+                </div>
+
+
+
+                <div class="AddMedP" style="display: none;">
+                    <h2>Add Medicine Page</h2>
+                    <form id="addMedicineForm">
+                        <div class="form-group">
+                            <label for="AmedName">Medicine Name:</label>
+                            <input type="text" id="AmedName" name="medName" placeholder="Enter Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="AmedQuantity">Quantity:</label>
+                            <input type="number" id="AmedQuantity" name="medQuantity" placeholder="Enter Quantity"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="AmedPrice">Price:</label>
+                            <input type="number" id="AmedPrice" name="medPrice" placeholder="Enter Price" required>
+                        </div>
+                        <button type="submit" onclick="AddMed()" class="AddMed-btn">Add Medicine</button>
+                    </form>
+                </div>
+
+
+
+                <div class="RemMedP" style="display: none;">
+                    <h2>Remove Medicine Page</h2>
+                    <form id="removeMedicineForm">
+                        <div class="form-group">
+                            <label for="RmedName">Enter Medicine Name</label>
+                            <input type="text" id="RmedName" name="medName" placeholder="Enter Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="RmedQuantity">Quantity:</label>
+                            <input type="number" id="RmedQuantity" name="medQuantity" placeholder="Enter Quantity"
+                                required>
+                        </div>
+                        <button type="submit" onclick="RemMed()" class="RemMed-btn">Remove Medicine</button>
+                    </form>
+                </div>
+
+
+
+                <div class="PrintIP" style="display: none;">
+                    <h2>Print Inventory Page</h2>
+                    <div class="table-div">
+
+                    </div>
+                </div>
+
+
+
+                <div class="AddCusP" style="display: none">
+                    <h2>Customer Details</h2>
+                    <form id="customerDetailsForm">
+                        <div class="form-group">
+                            <label for="Cfirstname">Firstname:</label>
+                            <input type="text" id="Cfirstname" name="firstname" placeholder="Enter Firstname" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Clastname">Lastname:</label>
+                            <input type="text" id="Clastname" name="lastname" placeholder="Enter Lastname" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Cgender">Gender:</label>
+                            <select name="gender" id="Cgender" required>
+                                <option value="" disabled selected>Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Cage">Age:</label>
+                            <input type="number" id="Cage" name="age" placeholder="Enter Age" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Cmobile">Mobile Number:</label>
+                            <input type="tel" id="Cmobile" name="mobile" maxlength="10"
+                                placeholder="Enter cus mobile number" required>
+                        </div>
+
+                        <button type="button" onclick="AddCus()" class="AddCusP-btn btn">Add Customer</button>
+                    </form>
+                </div>
+
+
+
+                <div class="PrintCusP" style="display: none;">
+                    <h2>Print Customers Details Page</h2>
+                    <div class="table-div">
+
+                    </div>
+                </div>
+
+
+
+                <div class="GBillP" style="display: none;">
+                    <h2>Generate Bill Page</h2>
+
+                    <div class="GBillP1">
+                        <h3>Customer Details</h3>
+                        <form id="GBillP1Form">
+
+                            <div class="form-group">
+                                <label for="Gmobile">Mobile Number:</label>
+                                <input type="tel" id="Gmobile" name="mobile" maxlength="10"
+                                    placeholder="Enter cus mobile number" required>
+                            </div>
+
+                            <button type="button" onclick="GBillP1()" class="GBillP1-btn btn">Next</button>
+                        </form>
+                    </div>
+
+
+
+                    <div class="GBillP2" style="display: none;">
+                        <h3>Add Medicine To GBill</h3>
+                        <form id="GBillP2Form">
+                            <div class="form-group">
+                                <label for="GmedName">Name:</label>
+                                <input type="text" id="GmedName" name="medName" placeholder="Enter Name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="GmedQuantity">Quantity:</label>
+                                <input type="text" id="GmedQuantity" name="medQuantity" placeholder="Enter Quantity"
+                                    required>
+                            </div>
+
+                            <button type="button" onclick="GBillP2()" class="GBillP2-btn btn">Add</button>
+                        </form>
+                    </div>
+
+
+
+                    <div class="GBillP3" style="display: none">
+                        <h2>Medicine Inventory</h2>
+                        <div class="table-div">
+
+                        </div>
+                        <button type="button" onclick="GBill()" class="GBillP-btn btn">Generate Bill</button>
+                    </div>
+                </div>
+
+
+
+                <div class="SalesHisP" style="display: none;">
+                    <h2>Sales History</h2>
+                    <div class="table-div">
+
+                    </div>
+                </div>
+
+
+
+                <div class="ProfileP" style="display: none;">
+                    <h2>Profile Page</h2>
+
+                    <div class="profile-container">
+                        <div class="profile-details">
+
+                        </div>
+                        <button onclick="EditProfile()" class="EditProfile-btn btn">Edit Profile</button>
+                        <button onclick="LogOut()" class="LogOut-btn btn">Log Out</button>
+                    </div>
+
+
+
+                    <div class="ProfileEP" style="display: none;">
+                        <div class="sub-container1">
+                            <form id="Editform1">
+                                <div class="form-group">
+                                    <label for="firstname">First Name:</label>
+                                    <input type="text" id="firstname" name="firstname" placeholder="Enter Firstname"
+                                        required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="lastname">Last Name:</label>
+                                    <input type="text" id="lastname" name="lastname" placeholder="Enter Lastname"
+                                        required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="dob">Date of Birth:</label>
+                                    <input type="date" id="dob" name="dob" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="gender">Gender:</label>
+                                    <select name="gender" id="gender" required>
+                                        <option value="" disabled selected>Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="mobile">Mobile Number:</label>
+                                    <input type="tel" id="mobile" name="mobile" maxlength="10"
+                                        placeholder="Enter your mobile number" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="address">Address:</label>
+                                    <input type="text" id="address" name="address" placeholder="Enter Address" required>
+                                </div>
+
+                                <button type="button" class="next-btn btn" onclick="EditForm()">Next</button>
+                            </form>
+                        </div>
+
+
+
+                        <div class="sub-container2" style="display: none">
+                            <form id="Editform2">
+                                <div class="form-group">
+                                    <label for="Cusername">Username:</label>
+                                    <input type="text" id="Cusername" name="username" placeholder="Create Username"
+                                        required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="Cpassword1">Password:</label>
+                                    <input type="password" id="Cpassword1" name="password1"
+                                        placeholder="Create Password" required>
+                                    <input type="password" id="Cpassword2" name="password2"
+                                        placeholder="Confirm Password" required>
+                                </div>
+
+                                <button type="submit" class="Saveform-btn btn" onclick="SaveProfile()">Save</button>
+                            </form>
+                            <button class="back-btn btn" onclick="showsubContainer1()">Back</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+    <!-- Receipt Section -->
+    <div class="body-recipt" style="display: none">
+        <button class="close" onclick="wrong()"></button>
+        <div class="recipt">
+            <div class="recipt_info">
+
+            </div>
+
+            <h2>Medicine Purchased</h2>
+            <div class="table-div">
+
+            </div>
+
+            <div class="total-section">
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="main.js"></script>
+    <script src="extra.js"></script>
+</body>
+
+</html>
